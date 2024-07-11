@@ -63,6 +63,7 @@ public class Main {
     }
 
     private static void eliminarConductor() {
+        mostrarConductores();
         System.out.println("Introduzca el Dni sin la letra");
         numDni = s1.nextInt();
         dni = String.valueOf(numDni) + letraNif[numDni%23];

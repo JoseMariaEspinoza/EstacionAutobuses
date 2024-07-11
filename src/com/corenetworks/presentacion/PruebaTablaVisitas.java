@@ -1,7 +1,6 @@
 package com.corenetworks.presentacion;
 
-import com.corenetworks.modelo.Conductor;
-import com.corenetworks.modelo.Visitas;
+import com.corenetworks.modelo.Visita;
 import com.corenetworks.persistencia.AccesoTablaVisitas;
 
 import java.sql.SQLException;
@@ -51,7 +50,7 @@ public class PruebaTablaVisitas {
         idLugar = s1.nextInt();
 
         try {
-            atv1.modificarVisita(new Visitas(idVisita,fVisita,dni,matricula,idLugar));
+            atv1.modificarVisita(new Visita(idVisita,fVisita,dni,matricula,idLugar));
             System.out.println("Visita modificada");
         } catch (SQLException e) {
             System.out.println(e.toString());
@@ -78,6 +77,7 @@ public class PruebaTablaVisitas {
     }
 
     private static void eliminarVisita() {
+        mostrarVisitas();
         System.out.println("Introduce el IdVisita");
         idVisita = s1.nextInt();
         try {
@@ -107,7 +107,7 @@ public class PruebaTablaVisitas {
         System.out.println("Introduce el idLugar");
         idLugar = s1.nextInt();
         try {
-            atv1.altaVisita(new Visitas(idVisita,fVisita,dni,matricula,idLugar));
+            atv1.altaVisita(new Visita(idVisita,fVisita,dni,matricula,idLugar));
             System.out.println("Visita creada");
         } catch (SQLException e) {
             System.out.println(e.toString());

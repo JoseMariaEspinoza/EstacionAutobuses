@@ -1,6 +1,6 @@
 package com.corenetworks.persistencia;
 
-import com.corenetworks.modelo.Visitas;
+import com.corenetworks.modelo.Visita;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AccesoTablaVisitas extends Conexion{
-    public int altaVisita(Visitas v) throws SQLException {
+    public int altaVisita(Visita v) throws SQLException {
         //1.Declarar variables
         PreparedStatement comando;
         int resultado;
@@ -59,11 +59,11 @@ public class AccesoTablaVisitas extends Conexion{
 
     }
 
-    public List<Visitas> consultaVisita(int id) throws SQLException {
+    public List<Visita> consultaVisita(int id) throws SQLException {
         //0. Definición de variables
         PreparedStatement comando;
         ResultSet rejilla;
-        List<Visitas> resultado = new ArrayList<>();
+        List<Visita> resultado = new ArrayList<>();
         String sql = "select * from visitas where id_visita = ?";
         //1. Abrir la conexion
         abrirConexion();
@@ -76,7 +76,7 @@ public class AccesoTablaVisitas extends Conexion{
         //5. Obtener el resultado
         while (rejilla.next()) {
             //En caso de que si traiga resultados
-            resultado.add(new Visitas(rejilla.getInt(1),
+            resultado.add(new Visita(rejilla.getInt(1),
                     rejilla.getDate(2).toLocalDate(),
                     rejilla.getString(3), rejilla.getString(4),
                     rejilla.getInt(5)));
@@ -88,11 +88,11 @@ public class AccesoTablaVisitas extends Conexion{
         return resultado;
     }
 
-    public List<Visitas> mostrarVisitas() throws SQLException {
+    public List<Visita> mostrarVisitas() throws SQLException {
         //0. Definición de variables
         PreparedStatement comando;
         ResultSet rejilla;
-        List<Visitas> resultado = new ArrayList<>();
+        List<Visita> resultado = new ArrayList<>();
         String sql = "select * from visitas";
         //1. Abrir la conexion
         abrirConexion();
@@ -104,7 +104,7 @@ public class AccesoTablaVisitas extends Conexion{
         //5. Obtener el resultado
         while (rejilla.next()) {
             //En caso de que si traiga resultados
-            resultado.add(new Visitas(rejilla.getInt(1),
+            resultado.add(new Visita(rejilla.getInt(1),
                     rejilla.getDate(2).toLocalDate(),
                     rejilla.getString(3),rejilla.getString(4),
                     rejilla.getInt(5)));        }
@@ -116,7 +116,7 @@ public class AccesoTablaVisitas extends Conexion{
 
     }
 
-    public int modificarVisita(Visitas v) throws SQLException {
+    public int modificarVisita(Visita v) throws SQLException {
         //0. Definición de variables
         PreparedStatement comando;
         int resultado;

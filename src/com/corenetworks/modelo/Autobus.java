@@ -1,6 +1,6 @@
 package com.corenetworks.modelo;
 
-public class Autobuses {
+public class Autobus {
     private String matricula;
     private int aFabricacion;
 
@@ -12,10 +12,10 @@ public class Autobuses {
                 '}';
     }
 
-    public Autobuses() {
+    public Autobus() {
     }
 
-    public Autobuses(String matricula, int aFabricacion) {
+    public Autobus(String matricula, int aFabricacion) {
         this.matricula = matricula;
         this.aFabricacion = aFabricacion;
     }

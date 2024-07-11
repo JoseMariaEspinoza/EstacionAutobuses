@@ -1,12 +1,9 @@
 package com.corenetworks.presentacion;
 
-import com.corenetworks.modelo.Autobuses;
-import com.corenetworks.modelo.Visitas;
+import com.corenetworks.modelo.Autobus;
 import com.corenetworks.persistencia.AccesoTablaAutobuses;
-import com.corenetworks.persistencia.AccesoTablaVisitas;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.Scanner;
 
 public class PruebaTablaAutobuses {
@@ -39,7 +36,7 @@ public class PruebaTablaAutobuses {
         aFabricacion = s1.nextInt();
 
         try {
-            ata1.modificarVisita(new Autobuses(matricula,aFabricacion));
+            ata1.modificarVisita(new Autobus(matricula,aFabricacion));
             System.out.println("Autobus modificado");
         } catch (SQLException e) {
             System.out.println(e.toString());
@@ -65,6 +62,7 @@ public class PruebaTablaAutobuses {
     }
 
     private static void eliminarAutobus() {
+        mostrarAutobuses();
         System.out.println("Introduce la matricula");
         matricula = s1.next().toUpperCase();
         try {
@@ -82,7 +80,7 @@ public class PruebaTablaAutobuses {
         System.out.println("Introduce el año de fabricacion");
         aFabricacion = s1.nextInt();
         try {
-            ata1.altaAutobus(new Autobuses(matricula,aFabricacion));
+            ata1.altaAutobus(new Autobus(matricula,aFabricacion));
             System.out.println("Autobus creado");
         } catch (SQLException e) {
             System.out.println(e.toString());

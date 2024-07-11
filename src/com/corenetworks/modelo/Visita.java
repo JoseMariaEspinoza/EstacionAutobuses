@@ -2,7 +2,7 @@ package com.corenetworks.modelo;
 
 import java.time.LocalDate;
 
-public class Visitas {
+public class Visita {
     private int idVista;
     private LocalDate fVisita;
     private String dni;
@@ -20,10 +20,10 @@ public class Visitas {
                 '}';
     }
 
-    public Visitas() {
+    public Visita() {
     }
 
-    public Visitas(int idVista, LocalDate fVisita, String dni, String matricula, int idLugar) {
+    public Visita(int idVista, LocalDate fVisita, String dni, String matricula, int idLugar) {
         this.idVista = idVista;
         this.fVisita = fVisita;
         this.dni = dni;

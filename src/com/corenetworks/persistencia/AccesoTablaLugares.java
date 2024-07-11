@@ -1,6 +1,6 @@
 package com.corenetworks.persistencia;
 
-import com.corenetworks.modelo.Autobus;
+import com.corenetworks.modelo.Lugar;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,22 +8,21 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AccesoTablaAutobuses extends Conexion {
-    public int altaAutobus(Autobus a) throws SQLException {
+public class AccesoTablaLugares extends Conexion{
+    public int altaLugar(Lugar l) throws SQLException {
         //1.Declarar variables
         PreparedStatement comando;
         int resultado;
         String sql = """
-                insert into autobuses values (?,?);
+                insert into lugares values (?,?);
                 """;
         //2.Abrir conexion
         abrirConexion();
         //3.Obtener el statement de la conexion
         comando = miConexion.prepareStatement(sql);
         //4.Asignar valor a los parametros del statement
-        comando.setString(1, a.getMatricula());
-        comando.setInt(2, a.getaFabricacion());
-
+        comando.setInt(1, l.getIdLugar());
+        comando.setString(2, l.getNombre());
         //5.Ejecutar query
         resultado = comando.executeUpdate();
         //6.Devolver el resultado
@@ -33,19 +32,19 @@ public class AccesoTablaAutobuses extends Conexion {
 
     }
 
-    public int eliminarAutobus(String matricula) throws SQLException {
+    public int eliminarLugar(int id) throws SQLException {
         //1.Declarar variables
         PreparedStatement comando;
         int resultado;
         String sql = """
-                delete from autobuses where matricula = ?;
+                delete from lugares where id_lugar = ?;
                 """;
         //2.Abrir conexion
         abrirConexion();
         //3.Obtener el statement de la conexion
         comando = miConexion.prepareStatement(sql);
         //4.Asignar valor a los parametros del statement
-        comando.setString(1, matricula);
+        comando.setInt(1, id);
         //5.Ejecutar query
         resultado = comando.executeUpdate();
         //6.Devolver el resultado
@@ -55,25 +54,25 @@ public class AccesoTablaAutobuses extends Conexion {
 
     }
 
-    public List<Autobus> consultaAutobus(String matricula) throws SQLException {
+    public List<Lugar> consultaLugar(int id) throws SQLException {
         //0. Definición de variables
         PreparedStatement comando;
         ResultSet rejilla;
-        List<Autobus> resultado = new ArrayList<>();
-        String sql = "select * from autobuses where matricula = ?";
+        List<Lugar> resultado = new ArrayList<>();
+        String sql = "select * from lugares where id_lugar = ?";
         //1. Abrir la conexion
         abrirConexion();
         //2. Obtener el comando de la conexion
         comando = miConexion.prepareStatement(sql);
         //3. Asignar valor a los parámetros del comando
-        comando.setString(1, matricula);
+        comando.setInt(1, id);
         //4. Ejecutar la sentencia
         rejilla = comando.executeQuery();
         //5. Obtener el resultado
         while (rejilla.next()) {
             //En caso de que si traiga resultados
-            resultado.add(new Autobus(rejilla.getString(1),
-                    rejilla.getInt(2)));
+            resultado.add(new Lugar(rejilla.getInt(1),
+                    rejilla.getString(2)));
         }
         //6. cerrar
         rejilla.close();
@@ -82,12 +81,12 @@ public class AccesoTablaAutobuses extends Conexion {
         return resultado;
     }
 
-    public List<Autobus> mostrarAutobuses() throws SQLException {
+    public List<Lugar> mostrarLugares() throws SQLException {
         //0. Definición de variables
         PreparedStatement comando;
         ResultSet rejilla;
-        List<Autobus> resultado = new ArrayList<>();
-        String sql = "select * from autobuses";
+        List<Lugar> resultado = new ArrayList<>();
+        String sql = "select * from lugares";
         //1. Abrir la conexion
         abrirConexion();
         //2. Obtener el comando de la conexion
@@ -98,8 +97,8 @@ public class AccesoTablaAutobuses extends Conexion {
         //5. Obtener el resultado
         while (rejilla.next()) {
             //En caso de que si traiga resultados
-            resultado.add(new Autobus(rejilla.getString(1),
-                    rejilla.getInt(2)));      }
+            resultado.add(new Lugar(rejilla.getInt(1),
+                    rejilla.getString(2)));       }
         //6. cerrar
         rejilla.close();
         comando.close();
@@ -108,14 +107,14 @@ public class AccesoTablaAutobuses extends Conexion {
 
     }
 
-    public int modificarVisita(Autobus a) throws SQLException {
+    public int modificarLugares(Lugar l) throws SQLException {
         //0. Definición de variables
         PreparedStatement comando;
         int resultado;
         String sql = """
-                update autobuses
-                set a_fabricacion = ?
-                where matricula = ?
+                update lugares
+                set nombre = ?
+                where id_lugar = ?
                 """;
         //1. Abrir la conexion
         abrirConexion();
@@ -123,10 +122,11 @@ public class AccesoTablaAutobuses extends Conexion {
         comando = miConexion.prepareStatement(sql);
         //3. Asignar valor a los parámetros del comando
         //Dar valor a los parámetros
-        comando.setInt(1, a.getaFabricacion());
-        comando.setString(2,a.getMatricula());
+        comando.setString(1, l.getNombre());
+        comando.setInt(2, l.getIdLugar());
 
-        resultado = comando.executeUpdate();
+        resultado=comando.executeUpdate();
+
         //6. cerrar
         comando.close();
         cerrarConexion();
